@@ -9,6 +9,7 @@ COPY --from=node /usr/local/bin /usr/local/bin
 
 RUN apk add --no-cache \
     git \
+    gcompat \
     build-base \
     tzdata \
     yarn \
