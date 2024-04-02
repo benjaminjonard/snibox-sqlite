@@ -3,3 +3,9 @@ development:
   pool: 5
   timeout: 5000
   database: <%= ENV['DATABASE'] || "db/database/snibox.sqlite3" %>
+
+production:
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+  database: <%= ENV['DATABASE'] || "db/database/snibox.sqlite3" %>
