@@ -9,9 +9,9 @@ jobs:
 
     steps:
       # SETUP
-      - uses: benjaminjonard/actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
-          repository: snibox-sqlite
+          repository: benjaminjonard/snibox-sqlite
           ref: config-improvements
           token: ${{ secrets.GITHUB_TOKEN }}
 
