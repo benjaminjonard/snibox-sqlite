@@ -27,5 +27,5 @@ jobs:
         with:
           file: Dockerfile          
           push: true    
-          tags: benjaminjonard:snibox
+          tags: benjaminjonard/snibox
           platforms: linux/amd64,linux/arm64   
