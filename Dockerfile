@@ -1,7 +1,6 @@
 FROM ruby:2.6-alpine
 
 RUN apk add --no-cache \
-    git \
     build-base \
     tzdata \
     nodejs \
@@ -18,6 +17,8 @@ ENV RAILS_SERVE_STATIC_FILES=true
 ENV RAILS_ENV production
 ENV RACK_ENV production
 ENV NODE_ENV production
+
+COPY . /app
 
 RUN cp -r ./snibox /app && cd /app
 
