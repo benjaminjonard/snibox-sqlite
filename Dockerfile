@@ -22,7 +22,7 @@ COPY . /app
 
 RUN mv -n /app/snibox /app
 
-RUN echo "gem 'sqlite3', '~> 1.3.6'" >> Gemfile && gem install bundler -v 2.4.22 && bundle install
+RUN echo "gem 'sqlite3', '~> 1.3.13'" >> Gemfile && gem install bundler -v 2.4.22 && bundle install
 
 VOLUME /app/db/database
 
