@@ -1,24 +1,50 @@
-FROM ruby:2.6.1-alpine3.9
+FROM ruby:2.6.8-alpine
 
-RUN apk add --no-cache -t build-dependencies \
-    build-base \
-    postgresql-dev \
-  && apk add --no-cache \
+RUN apk add --no-cache \
     git \
+    build-base \
     tzdata \
     nodejs \
-    yarn
+    yarn \
+    sqlite-dev \
+    bash \
+    postgresql-dev \
+    python2
 
 WORKDIR /app
 
-COPY Gemfile Gemfile.lock ./
 
+ENV RAILS_SERVE_STATIC_FILES=true
 ENV RAILS_ENV production
 ENV RACK_ENV production
 ENV NODE_ENV production
 
-RUN gem install bundler && bundle install --deployment --without development test
+ENV SECRET_KEY_BASE="08898973823f6f1d121ce30fb8adc1c559dcfc08f358cfc0298e4aad81b8c9d798e8249e3a4b26c04255cf8b2d71eaf8eda865d173ae3fe6fb1a599d1b1fa260"
+
+COPY Gemfile Gemfile.lock ./
+
+RUN bundle update --bundler
+
+RUN gem install bundler:1.17.2
+
+RUN bundle update rails
+
+
+RUN echo "gem 'sqlite3', '~> 1.3.6'" >> Gemfile && gem install bundler && bundle install
 
 COPY . ./
 
-RUN SECRET_KEY_BASE=docker ./bin/rake assets:precompile && ./bin/yarn cache clean
+VOLUME /app/db/database
+
+RUN yarn install --check-files; bundle exec rake assets:precompile
+
+RUN apk del \
+    git \
+    python2 \
+    build-base
+
+EXPOSE 3000
+
+CMD if [ -f /app/tmp/pids/server.pid ]; then rm -f /app/tmp/pids/server.pid; fi && cd /app && bundle exec rake 'db:migrate' && bundle exec rails server -b 0.0.0.0
+
+

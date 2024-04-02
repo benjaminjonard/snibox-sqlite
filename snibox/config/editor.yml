@@ -25,12 +25,14 @@ languages:
   java: Java
   javascript: JavaScript
   julia: Julia
+  stex: LaTeX
   less: LESS
   livescript: Livescript
   lua: Lua
   markdown: Markdown
   nginx: Nginx
   objectivec: Objective-C
+  octave: Octave/Matlab
   perl: Perl
   php: PHP
   powershell: Powershell
@@ -47,6 +49,7 @@ languages:
   stylus: Stylus
   swift: Swift
   tcl: Tcl
+  toml: TOML
   twig: Twig
   xml: XML
   xquery: XQuery
