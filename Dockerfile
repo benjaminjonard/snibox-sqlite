@@ -1,6 +1,7 @@
 FROM ruby:2.6-alpine
 
 RUN apk add --no-cache \
+    git \
     build-base \
     tzdata \
     nodejs \
@@ -20,9 +21,9 @@ ENV NODE_ENV production
 
 COPY . /app
 
-RUN mv -n /app/snibox /app
+RUN cd /app
 
-RUN echo "gem 'sqlite3', '~> 1.3.13'" >> Gemfile && gem install bundler -v 2.4.22 && bundle install
+RUN gem install bundler -v 2.4.22 && bundle add sqlite3 && bundle install --force
 
 VOLUME /app/db/database
 

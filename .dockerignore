@@ -1,9 +1,9 @@
 .git
 .gitignore
 .dockerignore
-Dockerfile
-README.md
+snibox/Dockerfile
+snibox/README.md
 docker-compose.yml
 snibox.sh
-build_container.yml
-upload_image.yml
+snibox/build_container.yml
+snibox/upload_image.yml
