@@ -1,14 +1,21 @@
+FROM node:12-alpine AS node
+
 FROM ruby:2.6-alpine
+
+COPY --from=node /usr/lib /usr/lib
+COPY --from=node /usr/local/lib /usr/local/lib
+COPY --from=node /usr/local/include /usr/local/include
+COPY --from=node /usr/local/bin /usr/local/bin
 
 RUN apk add --no-cache \
     git \
     build-base \
     tzdata \
-    nodejs \
     yarn \
     sqlite-dev \
     bash \
-    postgresql-dev
+    postgresql-dev \
+    python2
 
 WORKDIR /app
 
